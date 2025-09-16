@@ -47,8 +47,6 @@
 
             const encodedUrl = Base64.encode(targetUrl);
             contentFrame.src = `/proxy/${encodedUrl}`;
-            
-            // This is the magic! Update the browser's address bar without reloading.
             history.pushState(null, '', `/view/${targetUrl}`);
         }
 
@@ -61,11 +59,10 @@
             overlay.style.display = 'none';
         });
 
-        // On page load, check if we need to load a URL from the path
         document.addEventListener('DOMContentLoaded', () => {
             const path = window.location.pathname;
             if (path.startsWith('/view/')) {
-                const urlToLoad = path.substring(6); // Get URL after "/view/"
+                const urlToLoad = path.substring(6); 
                 if (urlToLoad) {
                     loadUrlInProxy(urlToLoad);
                 }
