@@ -37,7 +37,7 @@ const proxy = createProxyMiddleware({
         if (!encodedUrl) throw new Error('Encoded URL is required.');
         return base64.decode(encodedUrl);
     },
-    // **FIXED:** This correctly removes the /view segment from the path
+    // **FIXED:** This now correctly removes the /view segment from the path
     // so the proxy can request the original URL.
     pathRewrite: (path, req) => {
         return path.replace(/^\/view/, '');
